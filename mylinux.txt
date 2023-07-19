@@ -1,91 +1,17 @@
-$ sudo fdisk -l
-Disk /dev/sda: 150 GiB, 161061273600 bytes, 314572800 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disklabel type: dos
-Disk identifier: 0x442afc28
-
-Device     Boot     Start       End   Sectors  Size Id Type
-/dev/sda1            2048   1026047   1024000  500M 83 Linux
-/dev/sda2  *      1026048   1435647    409600  200M  6 FAT16
-/dev/sda3         1435648 104857599 103421952 49.3G 8e Linux LVM
-/dev/sda4       104857600 125829119  20971520   10G  5 Extended
-
-
-
-
-Disk /dev/mapper/rootvg-root_lv: 4.3 GiB, 4630511616 bytes, 9043968 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-swap_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-var_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-opt_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-tmp_lv: 2 GiB, 2147483648 bytes, 4194304 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-home_lv: 1 GiB, 1073741824 bytes, 2097152 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-
-Disk /dev/mapper/rootvg-pg_tblspc: 30 GiB, 32212254720 bytes, 62914560 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-
-$ lsblk -f
-NAME                 FSTYPE      LABEL UUID                                   MOUNTPOINT
-sda                                                                           
-├─sda1               xfs               bb7e04d8-69b5-4d6a-aa49-ba26cbcb98dd   /boot
-├─sda2               vfat              B5B4-29F5                              /boot/efi
-├─sda3               LVM2_member       vxSRDH-tqbh-a4Uk-pgzG-RXfC-2ud1-k2STd6 
-│ ├─rootvg-root_lv   xfs               5a4e6a73-dc09-4a6a-a439-153c9ef3053f   /
-│ ├─rootvg-swap_lv   swap              cf65faee-521f-48b4-b42d-6e95802965fc   [SWAP]
-│ ├─rootvg-var_lv    xfs               0804ee11-ac74-4c85-8a1c-39b9a5529558   /var
-│ ├─rootvg-opt_lv    xfs               b57f3491-73f3-4585-9a09-8646ef23ecd6   /opt
-│ ├─rootvg-tmp_lv    xfs               335940af-994a-4aab-b07a-c98a613e4ceb   /tmp
-│ ├─rootvg-home_lv   xfs               5c9e4f0d-94c3-4af7-9588-24be7db0acee   /home
-│ └─rootvg-pg_tblspc xfs               e4c8ee1f-dd45-4ef8-9aee-e7086fa78327   /var/pg_tblspc
-└─sda4                                                                        
-sr0
-
-$ df -h
-Filesystem                    Size  Used Avail Use% Mounted on
-devtmpfs                      3.8G     0  3.8G   0% /dev
-tmpfs                         3.8G  104K  3.8G   1% /dev/shm
-tmpfs                         3.8G  417M  3.4G  11% /run
-tmpfs                         3.8G     0  3.8G   0% /sys/fs/cgroup
-/dev/mapper/rootvg-root_lv    4.4G  3.6G  745M  84% /
-/dev/mapper/rootvg-opt_lv     4.0G  807M  3.3G  20% /opt
-/dev/mapper/rootvg-var_lv     4.0G  2.7G  1.4G  67% /var
-/dev/mapper/rootvg-tmp_lv     2.0G   47M  2.0G   3% /tmp
-/dev/mapper/rootvg-home_lv   1014M  968M   47M  96% /home
-/dev/mapper/rootvg-pg_tblspc   30G  247M   30G   1% /var/pg_tblspc
-/dev/sda1                     495M  344M  151M  70% /boot
-/dev/sda2                     200M  8.0K  200M   1% /boot/efi
-tmpfs                         777M     0  777M   0% /run/user/29
-tmpfs                         777M   12K  777M   1% /run/user/37
-tmpfs                         777M     0  777M   0% /run/user/0
+$ lsblk
+NAME                 MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                    8:0    0  150G  0 disk 
+├─sda1                 8:1    0  500M  0 part /boot
+├─sda2                 8:2    0  200M  0 part /boot/efi
+├─sda3                 8:3    0 49.3G  0 part 
+│ ├─rootvg-root_lv   253:0    0  4.3G  0 lvm  /
+│ ├─rootvg-swap_lv   253:1    0    4G  0 lvm  [SWAP]
+│ ├─rootvg-var_lv    253:2    0    4G  0 lvm  /var
+│ ├─rootvg-opt_lv    253:3    0    4G  0 lvm  /opt
+│ ├─rootvg-tmp_lv    253:4    0    2G  0 lvm  /tmp
+│ ├─rootvg-home_lv   253:5    0    6G  0 lvm  /home
+│ └─rootvg-pg_tblspc 253:6    0   30G  0 lvm  /var/pg_tblspc
+├─sda4                 8:4    0    1K  0 part 
+└─sda5                 8:5    0   10G  0 part 
+  └─rootvg-home_lv   253:5    0    6G  0 lvm  /home
+sr0                   11:0    1 1024M  0 rom  
