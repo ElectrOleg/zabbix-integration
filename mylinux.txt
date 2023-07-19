@@ -1,3 +1,30 @@
-$ sudo vgs
-  VG     #PV #LV #SN Attr   VSize   VFree 
-  rootvg   2   7   0 wz--n- <59.31g <5.00g
+sudo fdisk -l /dev/sda
+Disk /dev/sda: 150 GiB, 161061273600 bytes, 314572800 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x442afc28
+
+Device     Boot     Start       End   Sectors  Size Id Type
+/dev/sda1            2048   1026047   1024000  500M 83 Linux
+/dev/sda2  *      1026048   1435647    409600  200M  6 FAT16
+/dev/sda3         1435648 104857599 103421952 49.3G 8e Linux LVM
+/dev/sda4       104857600 125829119  20971520   10G  5 Extended
+/dev/sda5       104859648 125829119  20969472   10G 83 Linux
+
+$ sudo parted /dev/sda print free
+Model: VMware Virtual disk (scsi)
+Disk /dev/sda: 161GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type      File system  Flags
+        16.4kB  1049kB  1032kB            Free Space
+ 1      1049kB  525MB   524MB   primary   xfs
+ 2      525MB   735MB   210MB   primary   fat16        boot
+ 3      735MB   53.7GB  53.0GB  primary                lvm
+ 4      53.7GB  64.4GB  10.7GB  extended
+ 5      53.7GB  64.4GB  10.7GB  logical
+        64.4GB  161GB   96.6GB            Free Space
