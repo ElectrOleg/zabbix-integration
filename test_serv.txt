@@ -1,0 +1,79 @@
+$ sudo fdisk -l
+Disk /dev/sda: 60 GiB, 64424509440 bytes, 125829120 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x6b7b999a
+
+Device     Boot   Start       End   Sectors  Size Id Type
+/dev/sda1          2048   1026047   1024000  500M 83 Linux
+/dev/sda2  *    1026048   1435647    409600  200M  6 FAT16
+/dev/sda3       1435648 125829119 124393472 59.3G 8e Linux LVM
+
+
+
+
+Disk /dev/mapper/rootvg-root_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rootvg-swap_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rootvg-var_lv: 3 GiB, 3221225472 bytes, 6291456 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rootvg-opt_lv: 4 GiB, 4294967296 bytes, 8388608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rootvg-tmp_lv: 2 GiB, 2147483648 bytes, 4194304 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rootvg-home_lv: 1 GiB, 1073741824 bytes, 2097152 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+$ lsblk -f
+NAME               FSTYPE      LABEL UUID                                   MOUNTPOINT
+sda                                                                         
+├─sda1             xfs               39eee27c-f8e4-4e1f-aaa8-c896815f69d1   /boot
+├─sda2             vfat              B522-2C76                              /boot/efi
+└─sda3             LVM2_member       L1dYuK-E5yI-ZWm8-DzlN-7dfK-ZtMX-CvI4Pi 
+  ├─rootvg-root_lv xfs               b44ffd9a-5195-466e-91e8-2d09f2f235bc   /
+  ├─rootvg-swap_lv swap              948be06f-4337-442d-b2a9-aeeca8910073   [SWAP]
+  ├─rootvg-var_lv  xfs               941e1b04-b661-4d0a-9c34-b40aacf72a81   /var
+  ├─rootvg-opt_lv  xfs               7d37c8c7-2b0b-4851-8ef4-99559aea8724   /opt
+  ├─rootvg-tmp_lv  xfs               c6e920a7-03a7-445d-b234-599344798c8f   /tmp
+  └─rootvg-home_lv xfs               550531d5-0741-45e1-a924-10757f0385b1   /home
+sr0        
+
+$ df -h
+Filesystem                  Size  Used Avail Use% Mounted on
+devtmpfs                    3.8G     0  3.8G   0% /dev
+tmpfs                       3.8G  4.0K  3.8G   1% /dev/shm
+tmpfs                       3.8G  385M  3.4G  11% /run
+tmpfs                       3.8G     0  3.8G   0% /sys/fs/cgroup
+/dev/mapper/rootvg-root_lv  4.0G  1.8G  2.3G  45% /
+/dev/sda1                   495M  347M  149M  71% /boot
+/dev/sda2                   200M  8.0K  200M   1% /boot/efi
+/dev/mapper/rootvg-home_lv 1014M   42M  973M   5% /home
+/dev/mapper/rootvg-opt_lv   4.0G  322M  3.7G   8% /opt
+/dev/mapper/rootvg-var_lv   3.0G  1.4G  1.7G  45% /var
+/dev/mapper/rootvg-tmp_lv   2.0G   47M  2.0G   3% /tmp
+tmpfs                       767M     0  767M   0% /run/user/0
