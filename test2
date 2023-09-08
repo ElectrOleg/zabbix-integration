@@ -1,0 +1,15 @@
+network: Connecting https://test.ru:9444/i3/ImxHTTPServlet?Diagnostic with proxy=DIRECT
+network: Connecting https://test.ru:9444/i3/ImxHTTPServlet?Diagnostic with cookie "JSESSIONID=0000ilHJRd:-1"
+basic: Applet initialized
+basic: Starting applet
+basic: completed perf rollup
+java.lang.NullPointerException
+	at imex.client.framework.MainWindow.start(MainWindow.java:3176)
+	at com.sun.deploy.uitoolkit.impl.awt.AWTAppletAdapter.start(Unknown Source)
+	at sun.plugin2.applet.Plugin2Manager$AppletExecutionRunnable.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+Ignored exception: java.lang.NullPointerException
+basic: Dialog type is not candidate for embedding
+security: Reset deny session certificate store
+basic: Removed progress listener: sun.plugin.util.ProgressMonitorAdapter@e032e6
+security: Reset deny session certificate store
